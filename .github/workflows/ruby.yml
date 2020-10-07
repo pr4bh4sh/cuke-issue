@@ -29,5 +29,16 @@ jobs:
         ruby-version: 2.6.3
     - name: Install dependencies
       run: bundle install
+    - name: Make git happy
+      run: git config user.name "pr4bh4sh" && git config user.email your_email@example.com
+    - name: Sign overcommit
+      run: bundle exec overcommit --sign
+    - name: Precommit Sign overcommit
+      run: bundle exec overcommit --sign pre-commit
     - name: Run overcommit
-      run: bundle exec overcommit -r
+      run: bundle exec overcommit -r || exit 0
+    - name: Introduce file change
+      run: echo '' >> features/test.feature && git add -u
+    - name: Create commit to trigger overcommit
+      run: git commit -m 'test'
+      
