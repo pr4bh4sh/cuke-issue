@@ -5,7 +5,7 @@ require_relative '../custom_rules/use_and_linter'
 class RubyGherkinLint
   def run(files)
     files    = ['features'] if files.empty?
-    offences = CukeLinter.lint(file_paths: files, linters: [UseAndLinter.new], formatters: [[CukeLinter::PrettyFormatter.new]])
+    offences = CukeLinter.lint(file_paths: files, linters: [UseAndLinter.new], formatters: [])
     offences
   end
 end

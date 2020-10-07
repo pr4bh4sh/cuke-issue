@@ -8,7 +8,8 @@ module Overcommit::Hook::PreCommit
 
       result.each do |error|
         file, line = error[:location].split(':')
-        messages << Overcommit::Hook::Message.new(:error, file, line, error[:problem])
+        msg        = "#{file}:#{line} #{error[:problem]}"
+        messages << Overcommit::Hook::Message.new(:error, file, line, msg)
       end
       messages
     end
